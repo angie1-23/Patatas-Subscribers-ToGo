@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SubscribersService } from '../subscribers.service';
 
 @Component({
   selector: 'app-login',
@@ -9,20 +10,32 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   public formLogin!:FormGroup;
+  reponse:string[]=[]
+  
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    public subscribersService:SubscribersService,
+
   ) {}
 
   ngOnInit(): void {
     this.formLogin=this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
+      UserName:['',[Validators.required]],
       password:['',[Validators.required,Validators.minLength(6)]]
     })
   }
 
   send(){
-    console.log(this.formLogin.value)
+    const value=this.formLogin.value
+    console.log(value)
+    this.subscribersService.postLoginService(value)
+      .subscribe(respuesta => {
+        console.log(respuesta)
+
+        this.reponse = respuesta;
+        console.log('Aqui', respuesta)
+      })
   }
 
 
