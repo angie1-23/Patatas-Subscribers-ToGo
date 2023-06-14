@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubscribersService } from '../subscribers.service';
 import { HomeResponse, InformationSubs } from '../information-subs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,12 @@ export class HomeComponent implements OnInit{
         this.listSubs = [];
       },
     });
+  }
+
+  search(term: string): void {
+    this.subscribersService.searchHeroes(term).subscribe(respuesta=>
+       console.log(respuesta)
+    );
   }
 
 

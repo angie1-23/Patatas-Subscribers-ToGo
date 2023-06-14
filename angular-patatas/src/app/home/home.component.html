@@ -1,21 +1,31 @@
 <p>home works!</p>
-<div class="row">
-    <div class="col">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Title</th>
-            <th>Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of listSubs ">
-            <td>{{post.Name}}</td>
-            <td>{{post.Email}}</td>
-            <td>{{post.PhoneNumber}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+<div id="search-component">
+	<h4><label for="search-box">Hero Search</label></h4>
+  
+	<input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col">
+		  <table class="table table-striped list">
+			<thead >
+			  <tr>
+				<th>id</th>
+				<th>Title</th>
+				<th>Date</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr *ngFor="let post of listSubs ">
+				<td>{{post.Name}}</td>
+				<td>{{post.Email}}</td>
+				<td>{{post.PhoneNumber}}</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+	  </div>
+</div>
