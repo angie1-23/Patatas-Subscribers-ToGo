@@ -41,8 +41,8 @@ export class SubscribersService {
     }
     return this.http.get<any[]>(`${this.urlBaseGet}/?criteria=${term}`,this.httpOptions).pipe(
       tap(x => x.length ?
-         console.log(`found heroes matching "${term}"`) :
-         console.log(`no heroes matching "${term}"`)),
+         this.log(`found heroes matching "${term}"`) :
+        this.log(`no heroes matching "${term}"`)),
       // catchError(this.handleError<any[]>('searchHeroes', []))
     );
   

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { SubscribersService } from '../subscribers.service';
 import { HomeResponse, InformationSubs } from '../information-subs';
 import { Observable, Subject } from 'rxjs';
@@ -11,6 +11,8 @@ import { Observable, Subject } from 'rxjs';
 export class HomeComponent implements OnInit{
 
   public listSubs: InformationSubs[] = [];
+  @Input() hero!: InformationSubs;
+ 
 
   constructor( 
     public subscribersService:SubscribersService){
@@ -31,11 +33,6 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  search(term: string): void {
-    this.subscribersService.searchHeroes(term).subscribe(respuesta=>
-       console.log(respuesta)
-    );
-  }
 
 
 }

@@ -1,12 +1,14 @@
-<p>home works!</p>
-<div id="search-component">
-	<h4><label for="search-box">Hero Search</label></h4>
-  
-	<input #searchBox id="search-box" (input)="search(searchBox.value)" />
+<p>home works!</p>  
+<!-- <div *ngIf="hero">
+	<h2>{{hero.Name | uppercase}} Details</h2>
+	<div><span>id: </span>{{hero.Id}}</div>
+	<div>
+	  <label>name:
+		<input [(ngModel)]="hero.Name" placeholder="name"/>
+	  </label>
+	</div> -->
 
-
-
-
+<app-search></app-search>
 <div class="container">
 	<div class="row">
 		<div class="col">
