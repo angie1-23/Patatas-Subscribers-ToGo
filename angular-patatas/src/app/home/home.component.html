@@ -30,25 +30,25 @@
 				<h1 class="modal-title fs-3"> Add new users</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
 			</div>
-			<form  #loginForm="ngForm" (ngSubmit)="userAdd(loginForm.value)" >
+			<form  [formGroup]="addUserForm" (ngSubmit)="userAdd()" >
 				<div class="modal-body">
 					<div class="mb-3">
 						<label for="userEmail" class="form-label"> Name subscribers </label>
-						<input type="text" class="form-control" [ngModel]="currentUser?.Name" aria-describedby="userName"
+						<input type="text" class="form-control" [ngModel]="currentUser?.Name" aria-describedby="userName" formControlName="Name" 
 							id="userName" name="Name">
 					</div>
 					<div class="mb-3">
 						<label for="userEmail" class="form-label"> Email subscribers </label>
-						<input type="text" class="form-control" [ngModel]="currentUser?.Email" aria-describedby="Email"
+						<input type="text" class="form-control" [ngModel]="currentUser?.Email" aria-describedby="Email" formControlName="Email" 
 							id="userEmail" name="Email">
 					</div>
 					<div class="mb-3">
 						<label for="userCountryCode" class="form-label"> CountryCode </label>
-						<input type="string" class="form-control" id="userCountryCode" [ngModel]="" name="CountryCode">
+						<input type="string" class="form-control" id="userCountryCode" [ngModel]="currentUser?.CountryCode" name="CountryCode" formControlName="CountryCode" >
 					</div>
 					<div class="mb-3">
 						<label for="userPhoneNumber" class="form-label"> PhoneNumber </label>
-						<input type="text" class="form-control" id="userPhoneNumber" [ngModel]="currentUser?.PhoneNumber"
+						<input type="text" class="form-control" id="userPhoneNumber" [ngModel]="currentUser?.PhoneNumber" formControlName="PhoneNumber"
 							name="PhoneNumber">
 					</div>
 				</div>

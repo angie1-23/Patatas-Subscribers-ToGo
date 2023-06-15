@@ -41,7 +41,7 @@ export class SubscribersService {
 
   //--- Add subcribers ----//
 
-  postSubscribersService(user:SubscribersB): Observable<SubscribersB> {
+  postSubscribersService(user:SubscribersB): Observable<any> {
     return this.http.post<SubscribersB>(this.urlBaseGet, user,this.httpOptions);
   }
 

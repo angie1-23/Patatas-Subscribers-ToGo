@@ -30,7 +30,8 @@ export interface HomeResponse{
     Data: InformationSubs[];
 }
 
-export interface SubscribersBo{
+export interface Subscriber{
+
     Id?:number;
     Name?:string;
     Email?:string;
@@ -39,8 +40,8 @@ export interface SubscribersBo{
     JobTitle?:string;
     Area?: string;
     Topics?:any[];
+    
 }
-
 export interface SubscribersB{
-    Subcribers:SubscribersBo[];
+    Subcribers:Subscriber[];
 }

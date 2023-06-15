@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { SubscribersService } from '../subscribers.service';
-import { HomeResponse, InformationSubs,SubscribersBo } from '../information-subs';
+import { HomeResponse, InformationSubs,SubscribersB,Subscriber} from '../information-subs';
+import { FormGroup,FormControl,Validators } from '@angular/forms';
 // import { Observable, Subject } from 'rxjs';
 
 @Component({
@@ -12,10 +13,19 @@ export class HomeComponent implements OnInit{
 
   public listSubs: InformationSubs[] = [];
   // @Input() listSubs: InformationSubs[]  = [];
-  users: Array<SubscribersBo> = []
-  listaUsers: SubscribersBo | null = null
+  usersArr: SubscribersB
+
+  listaUsers: SubscribersB | null = null
   modal: boolean = false
-  currentUser: SubscribersBo | null = null
+  currentUser: Subscriber| null = null
+ 
+
+  addUserForm = new FormGroup({
+    Name: new FormControl('', [Validators.required]),
+    Email: new FormControl('', [Validators.required]),
+    CountryCode: new FormControl('', [Validators.required]),
+    PhoneNumber: new FormControl('', [Validators.required]),
+  })
  
 
   constructor( 
@@ -37,28 +47,29 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  onShowModal(user:SubscribersBo | null) {
+  onShowModal(user:Subscriber | null) {
     this.currentUser = user
   }
 
   //Add new subscribers and udpdate//
-  userAdd(value:any) {
-    let USERS = "Subscribers":{
-      
+  userAdd() {
 
-      Name: value.Name,
-      Email: value.Email,
-      CountryCode: value.CountryCode,
-      PhoneNumber:value.PhoneNumber,
-      // JobTitle?:string;
-      // Area: string;
-      // Topics:any[];
-    }
-    let usersFinal = {"Subscribers":{[USERS]}}
-     
+    this.usersArr = this.addUserForm.value;
 
-    
-    console.log('aqui estoy',USERS)
+
+    // let USERS: Subscribers = {
+    //   Name: value.Name,
+    //   Email: value.Email,
+    //   CountryCode: value.CountryCode,
+    //   PhoneNumber:value.PhoneNumber,
+    // }
+
+    // let subscribers 
+
+    // console.log(USERS)
+  
+
+    // console.log('aqui estoy',this.usersArr)
     // console.log(this.currentUser);
     // if (this.currentUser) {
     //   //Edit product
@@ -75,9 +86,10 @@ export class HomeComponent implements OnInit{
     //   );
     // } else {
       //Creat product if id is defined
-    this.subscribersService.postSubscribersService(usersFinal).subscribe(
+    this.subscribersService.postSubscribersService( this.person).subscribe(
         data => {
           this.listSubs.push(data);
+          console.log(data)
           // this.subscribersService.update.emit({
           //   update: true,
           // });
