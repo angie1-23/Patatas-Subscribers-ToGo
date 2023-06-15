@@ -29,3 +29,18 @@ export interface HomeResponse{
     Count: number;
     Data: InformationSubs[];
 }
+
+export interface SubscribersBo{
+    Id?:number;
+    Name?:string;
+    Email?:string;
+    CountryCode?:string;
+    PhoneNumber?:string;
+    JobTitle?:string;
+    Area?: string;
+    Topics?:any[];
+}
+
+export interface SubscribersB{
+    Subcribers:SubscribersBo[];
+}

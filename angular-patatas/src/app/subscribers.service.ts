@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable,Output,EventEmitter} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { HomeResponse, InformationSubs} from './information-subs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable,of} from 'rxjs';
+import { HomeResponse, InformationSubs, SubscribersB} from './information-subs';
+// import { catchError, map, tap } from 'rxjs/operators';
 // import { MessageService } from './message.service';
 
 
@@ -15,30 +15,14 @@ export class SubscribersService {
   private urlBase = 'https://lab.app.invertebrado.co/api/account/login'
   private urlBaseGet='https://lab.app.invertebrado.co/api/subscribers/'
   token = localStorage.getItem('Token');
-  log: any;
+  @Output() update: EventEmitter<any> = new EventEmitter();
+  @Output() disparador: EventEmitter<any> = new EventEmitter();
 
   constructor( 
     private http: HttpClient
-    
-    // private messageService: MessageService
     ) { }
 
-    private handleError<T>(operation = 'operation', result?: T) {
-      return (error: any): Observable<T> => {
-    
-        // TODO: send the error to remote logging infrastructure
-        console.error(error); // log to console instead
-    
-        // TODO: better job of transforming error for user consumption
-        this.log(`${operation} failed: ${error.message}`);
-    
-        // Let the app keep running by returning an empty result.
-        return of(result as T);
-      };
-    }
-  
-
-
+// Headers and token 
   httpOptions = {
     headers: new HttpHeaders({
       Authorization: `Bearer ${this.token}`,
@@ -54,6 +38,17 @@ export class SubscribersService {
     return this.http.get<HomeResponse>(this.urlBaseGet, this.httpOptions); 
     
   }
+
+  //--- Add subcribers ----//
+
+  postSubscribersService(user:SubscribersB): Observable<SubscribersB> {
+    return this.http.post<SubscribersB>(this.urlBaseGet, user,this.httpOptions);
+  }
+
+  // updateSubscribersService(id: any, updateUsers: Subscribers):Observable<Subscribers> {
+  //   const urlPatch = `${this.urlBaseGet}/${id}`;   // PATCH api/heroes/42
+  //   return this.http.patch<Subscribers>(urlPatch, updateUsers, this.httpOptions);
+  // }
  
   searchSubscribers(term: string): Observable<InformationSubs[]> {
     if (!term.trim()) {
