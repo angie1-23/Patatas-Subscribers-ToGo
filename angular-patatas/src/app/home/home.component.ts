@@ -10,8 +10,8 @@ import { Observable, Subject } from 'rxjs';
 })
 export class HomeComponent implements OnInit{
 
-  public listSubs: InformationSubs[] = [];
-  @Input() hero!: InformationSubs;
+  // public listSubs: InformationSubs[] = [];
+  @Input() listSubs: InformationSubs[]  = [];
  
 
   constructor( 
@@ -31,6 +31,13 @@ export class HomeComponent implements OnInit{
         this.listSubs = [];
       },
     });
+  }
+
+  search(term: string): void {
+    this.subscribersService.searchSubscribers(term).subscribe(respuesta=>
+      this.listSubs=respuesta
+      
+    );
   }
 
 
